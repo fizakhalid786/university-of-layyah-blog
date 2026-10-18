@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>University of Layyah</title>
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --navy: #001f5c; --navy-2: #0a3a8f; --gold: #f2b705;
+  --bg: #f3f5fb; --card: #ffffff; --text: #16213e; --muted: #55607a; --line: #dde3f0;
+  --shadow: 0 10px 30px rgba(0,31,92,.10);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1226; --card: #131c38; --text: #e8edff; --muted: #9aa7c9; --line: #25305a; --shadow: 0 10px 30px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1226; --card: #131c38; --text: #e8edff; --muted: #9aa7c9; --line: #25305a; --shadow: 0 10px 30px rgba(0,0,0,.4);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(60px + env(safe-area-inset-top, 0px)); }
+body { font-family: "Segoe UI", system-ui, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto 0; height: env(safe-area-inset-top, 0px); background: var(--navy); z-index: 20; }
+
+.topbar { background: #00143d; color: #c8d3f5; font-size: 13px; text-align: center; padding: 7px 12px; letter-spacing: .4px; }
+
+header { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; padding: 26px 24px;
+  display: flex; align-items: center; justify-content: center; gap: 24px; }
+.logo { width: 100px; height: 100px; flex-shrink: 0; background: #fff; border-radius: 50%; padding: 6px;
+  border: 3px solid var(--gold); box-shadow: 0 6px 18px rgba(0,0,0,.35); display: grid; place-items: center; overflow: hidden; }
+.logo img, .logo svg { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+.logo svg { display: none; }
+header h1 { font-size: clamp(26px, 4.2vw, 42px); letter-spacing: .6px; line-height: 1.15; }
+header p { color: var(--gold); font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; font-size: 14px; margin-top: 6px; }
+
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--navy); border-top: 1px solid rgba(255,255,255,.15);
+  text-align: center; padding: 4px 10px; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+nav a { display: inline-block; color: #fff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-bottom: 3px solid transparent; transition: .2s; }
+nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+.hero { background: radial-gradient(circle at 20% 20%, rgba(242,183,5,.18), transparent 45%), linear-gradient(135deg, #0a3a8f, #001f5c);
+  color: #fff; text-align: center; padding: 76px 22px 84px; }
+.hero h2 { font-size: clamp(28px, 5vw, 46px); margin-bottom: 14px; }
+.hero h2 span { color: var(--gold); }
+.hero p { max-width: 700px; margin: 0 auto 28px; opacity: .92; font-size: 18px; }
+.btn { display: inline-block; text-decoration: none; font-weight: 700; padding: 13px 30px; border-radius: 999px; margin: 5px; transition: transform .15s, box-shadow .15s; }
+.btn.gold { background: var(--gold); color: #1a1a1a; }
+.btn.line { border: 2px solid #fff; color: #fff; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.3); }
+
+.section-head { text-align: center; margin: 56px 16px 6px; }
+.section-head h2 { font-size: 28px; }
+.section-head h2::after { content: ""; display: block; width: 64px; height: 4px; background: var(--gold); border-radius: 4px; margin: 10px auto 0; }
+.section-head p { color: var(--muted); margin-top: 10px; }
+
+.articles { width: 92%; max-width: 1150px; margin: 28px auto 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.article { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 30px 24px; box-shadow: var(--shadow);
+  transition: transform .2s; position: relative; overflow: hidden; }
+.article:hover { transform: translateY(-6px); }
+.article::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--navy-2), var(--gold)); }
+.icon { width: 54px; height: 54px; border-radius: 14px; background: var(--bg); display: grid; place-items: center; font-size: 27px; margin-bottom: 14px; }
+.article h3 { font-size: 20px; margin-bottom: 10px; }
+.article p { color: var(--muted); text-align: justify; }
+
+.cta { background: linear-gradient(135deg, var(--navy), var(--navy-2)); color: #fff; text-align: center; padding: 50px 20px; }
+.cta h2 { margin-bottom: 8px; }
+.cta p { margin-bottom: 20px; opacity: .9; }
+
+footer { background: #00143d; color: #c8d3f5; padding: 40px 24px 0; }
+.foot { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; }
+footer h4 { color: #fff; margin-bottom: 10px; }
+footer a { display: block; color: #c8d3f5; text-decoration: none; padding: 3px 0; }
+footer a:hover { color: var(--gold); }
+.copy { text-align: center; border-top: 1px solid rgba(255,255,255,.12); margin-top: 28px; padding: 16px 0 20px; font-size: 14px; }
+
+@media (max-width: 850px) {
+  .articles, .foot { grid-template-columns: 1fr; }
+  header { flex-direction: column; text-align: center; }
+  .hero { padding: 54px 20px 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">Layyah, Punjab, Pakistan</div>
+
+<header id="home">
+  <div class="logo">
+    <img src="C:/Users/COMPUTER WORLD/Desktop/vs code/tailwind project/image1.jpg"
+         alt="University of Layyah Logo"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <!-- Agar upar wali image na mile to ye backup emblem dikhega -->
+    <svg viewBox="0 0 100 100" role="img" aria-label="University of Layyah emblem">
+      <path d="M50 8 88 21v28c0 22-16 37-38 44C28 86 12 71 12 49V21z" fill="#fff" stroke="#001f5c" stroke-width="4"/>
+      <path d="M50 30 24 41l26 11 26-11z" fill="#001f5c"/>
+      <path d="M36 49v13c0 5 6 8 14 8s14-3 14-8V49l-14 6z" fill="#0a3a8f"/>
+    </svg>
+  </div>
+  <div>
+    <h1>University of Layyah</h1>
+    <p>Excellence in Education and Research</p>
+  </div>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#admissions">Admissions</a>
+  <a href="#departments">Departments</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="about">
+  <h2>Welcome to <span>University of Layyah</span></h2>
+  <p>University of Layyah is committed to providing quality education, innovative research opportunities, and professional development for students.</p>
+  <a class="btn gold" href="#admissions">Explore Admissions</a>
+  <a class="btn line" href="#departments">Learn More</a>
+</section>
+
+<div class="section-head" id="departments">
+  <h2>Why Choose Us</h2>
+  <p>Learning, research and a vibrant campus life</p>
+</div>
+
+<section class="articles">
+  <article class="article">
+    <div class="icon">🏫</div>
+    <h3>Modern Campus Facilities</h3>
+    <p>The University of Layyah provides modern classrooms, computer laboratories, libraries, and learning resources to support students in achieving academic excellence. The campus environment encourages creativity, collaboration, and innovation while helping students prepare for their future careers.</p>
+  </article>
+
+  <article class="article">
+    <div class="icon">🔬</div>
+    <h3>Research and Academic Excellence</h3>
+    <p>Research is an important part of the university's mission. Faculty members and students participate in research projects that contribute to scientific knowledge and solve practical problems. The university promotes academic excellence through modern teaching methods and continuous learning.</p>
+  </article>
+
+  <article class="article">
+    <div class="icon">🎓</div>
+    <h3>Student Life and Activities</h3>
+    <p>Students at the University of Layyah take part in sports events, cultural programs, seminars, workshops, and student societies. These activities help students develop leadership skills, teamwork, confidence, and social responsibility while making university life enjoyable and productive.</p>
+  </article>
+</section>
+
+<section class="cta" id="admissions">
+  <h2>Begin Your Journey With Us</h2>
+  <p>Take the first step towards a bright future. Contact the university for admission details.</p>
+  <a class="btn gold" href="#contact">Get in Touch</a>
+</section>
+
+<footer id="contact">
+  <div class="foot">
+    <div>
+      <h4>University of Layyah</h4>
+      <p>Excellence in Education and Research.<br>Layyah, Punjab, Pakistan</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#admissions">Admissions</a>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="#departments">Departments</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="copy">© 2026 University of Layyah | All Rights Reserved</div>
+</footer>
+
+</body>
+</html>
